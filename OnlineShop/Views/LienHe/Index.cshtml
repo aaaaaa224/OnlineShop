@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayout2.cshtml";
+}
+
+<div class="container">
+    <div class="col-md-8">
+        <div class="contact-form">
+            <h2 class="title text-center">Phản hồi cho chúng tôi</h2>
+            <div class="status alert alert-success" style="display: none"></div>
+            @using (Html.BeginForm("PhanHoi", "LienHe", FormMethod.Post, new { @class = "contact-form row", @id = "main-contact-form" }))
+            { @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group col-md-6">
+                    <input type="text" name="tennguoiphanhoi" class="form-control" placeholder="Tên của bạn">
+                    @Html.ValidationMessage("tennguoiphanhoi", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="email" name="email" class="form-control" placeholder="Email của bạn">
+                    @Html.ValidationMessage("email", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-12">
+                    <textarea name="noidung" id="noidung" class="form-control" rows="8" placeholder="Nội dung..."></textarea>
+                    @Html.ValidationMessage("noidung", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-12">
+                    <input type="submit" name="submit" class="btn btn-primary pull-right" value="Phản hồi">
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="contact-info">
+            <h2 class="title text-center">Thông tin công ty</h2>
+            <address>
+                <p>Killares Shop.</p>
+                <p>Quảng Đông Quang Trach Quang Bình</p>
+                <p>Việt Nam</p>
+                <p>Điện thoại:0364373194</p>
+                <p>Email: ducl471998@gmail.com</p>
+            </address>
+            <div class="social-networks">
+                <h2 class="title text-center">Liên hệ khác</h2>
+                <ul>
+                    <li>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-youtube"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@using Models.Entity;
+@using PagedList.Mvc;
+@model List<Models.Entity.SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<div class="box-body">
+    <div class="panel-heading">
+    </div>
+    <table id="example2" class="table table-bordered table-hover">
+        <caption style="text-align:center"><i><b>Kết quả tìm kiếm</b></i></caption>
+        <thead>
+            <tr>
+                <th>Mã SP</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá bán</th>
+                <th>Số lượng</th>
+                <th>Ảnh</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.masanpham</td>
+                    <td>
+                        @item.tensanpham
+                    </td>
+                    <td>@item.giaban VND</td>
+                    <td>@item.soluong</td>
+                    <td> <img src="@Url.Content("/Photo/"+@item.linkanh)" style="width:70px;height:70px;" alt="Chưa có ảnh" /></td>
+                    <td style="text-align:center;"><a href="/Admin/ProductManagement/Edit?masanpham=@item.masanpham"><span class="glyphicon glyphicon-edit"></span></a>--<a href="/Admin/ProductManagement/Delete?masanpham=@item.masanpham" onclick="return confirm('Bạn có muốn xóa ?')"><span class="glyphicon glyphicon-trash"></span></a></td>
+                </tr>
+            }
+
+
+        </tbody>
+        <tfoot>
+            <tr></tr>
+        </tfoot>
+    </table>
+</div>

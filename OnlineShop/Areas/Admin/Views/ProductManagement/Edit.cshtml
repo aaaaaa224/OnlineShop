@@ -1,0 +1,112 @@
+﻿@model Models.Entity.SanPham
+@using Models.Entity
+
+@{
+    ViewBag.Title = "Chỉnh xửa";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+@using (@Html.BeginForm("EditProduct", "ProductManagement", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken();
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-md-6">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Mã sản phẩm</label>
+                    <input type="text" readonly="readonly"class="form-control" id="masanpham" name="masanpham" style="border-radius: 0;box-shadow:none; border-color: #d2d6de;" value="@Model.masanpham">
+                    @Html.ValidationMessageFor(model => model.tensanpham, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tên sản phẩm</label>
+                    <input type="text" class="form-control" id="tensanpham" name="tensanpham" placeholder="Tên sản phẩm" style="border-radius: 0;box-shadow:none; border-color: #d2d6de;" value="@Model.tensanpham">
+                    @Html.ValidationMessageFor(model => model.tensanpham, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Giá cả</label>
+                    <input type="text" value="@Model.giaban" class="form-control" id="giaban" name="giaban" placeholder="Giá bán" style="border-radius: 0;box-shadow:none; border-color: #d2d6de;">
+                    @Html.ValidationMessageFor(model => model.giaban, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Mô tả</label>
+                    <textarea class="form-control" id="mota" name="mota" placeholder="Mô tả sản phẩm" style="border-radius: 0;box-shadow:none; border-color: #d2d6de;">@Model.mota</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Số lượng</label>
+                    <input type="number" value="@Model.soluong" class="form-control" id="soluong" name="soluong" placeholder="Số lượng" style="border-radius: 0;box-shadow:none; border-color: #d2d6de;">
+                    @Html.ValidationMessageFor(model => model.soluong, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Xuất xứ</label>
+                    <select class="form-control" style="border-radius: 0;box-shadow:none; border-color: #d2d6de;" name="xuatxu" id="xuatxu">
+                        <option id="1" value="Hàn Quốc" selected>Hàn Quốc</option>
+                        <option id="2" value="Việt Nam">Việt Nam</option>
+                        <option id="3" value="Trung Quốc">Trung Quốc</option>
+                        <option id="4" value="Nhật Bản">Nhật Bản</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Chọn ảnh</label>
+                    <input type="file" id="linkanh" value="Chọn ảnh" name="linkanh">
+                    @Html.ValidationMessageFor(model => model.linkanh, "", new { @class = "text-danger" })<br />
+                    <img src="@Url.Content("/Photo/"+@Model.linkanh)" style="width:100px;height:100px;"/>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+    <a href="~/Admin/ProductManagement/Index"><button class="btn btn-link">Quay về</button></a>
+    <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+        </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Danh mục sản phẩm</label>
+                    <select class="form-control" style="border-radius: 0;box-shadow:none; border-color: #d2d6de;" name="madanhmuc" id="madanhmuc">
+                        @foreach (var item in (List<DanhMucSanPham>)ViewBag.danhmucsanpham)
+                        {
+                            var select = "";
+
+                            if (Model.madanhmuc == @item.madanhmucsanpham)
+                            {
+                                select = "selected";
+                            }
+                            <option @select id="@item.madanhmucsanpham" value="@item.madanhmucsanpham">@item.tendanhmucsanpham</option>
+                        }
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Loại sản phẩm</label>
+                    <select class="form-control" style="border-radius: 0;box-shadow:none; border-color: #d2d6de;" name="maloaisanpham" id="maloaisanpham">
+                        @foreach (var item in (List<LoaiSanPham>)ViewBag.loaisanpham)
+                        {
+                            var select = "";
+
+                            if (Model.maloaisanpham == @item.maloaisanpham)
+                            {
+                                select = "selected";
+                            }
+                            <option  @select id="@item.maloaisanpham" value="@item.maloaisanpham">@item.tenloaisanpham</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Ưu tiên sản phẩm</label>
+                    <select class="form-control" style="border-radius: 0;box-shadow:none; border-color: #d2d6de;" name="madanhmuc" id="madanhmuc">
+                        <option id="1" selected="@Model.uutien" value="1"> Sản phẩm thường</option>
+                        <option id="2" value="2">Sản phẩm khuyến mãi</option>
+                        <option id="3" value="3">Sản phẩm mới</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Chi tiết sản phẩm</label>
+                    <textarea class="form-control" id="chitiet" name="chitiet" placeholder="Chi tiết sản phẩm" style="border-radius: 0;box-shadow:none; border-color: #d2d6de; height:150px;"></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+

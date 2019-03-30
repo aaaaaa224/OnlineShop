@@ -1,0 +1,31 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.IPagedList<Models.Entity.SanPham>
+
+@{
+    ViewBag.Title = "SannPhamTheoDanhMuc";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+<div class="features_items">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3">
+            <div class="product-image-wrapper">
+                <div class="single-products">
+                    <div class="productinfo text-center">
+
+                        <a href="/SanPham/ChiTietSp/?masanpham=@item.masanpham"><img src="@Url.Content("/Photo/"+@item.linkanh)" style="width:184px;height:162px;" alt="Chưa có ảnh" /></a>
+                        <h2>@item.giaban vnd</h2>
+                        <p>@item.tensanpham</p>
+                        <a href="/ShopingCart/AddItem/@item.masanpham" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào rỏ hàng</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+@Html.PagedListPager(Model, page => Url.Action("SanPhamTheoDanhMuc", new { page }))
+
+

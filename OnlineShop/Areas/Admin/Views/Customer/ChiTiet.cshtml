@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Chi tiết mua hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+@model IQueryable<Models.DTO.ChiTietGioHangDTO>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+<div class="box-body">
+    <div class="panel-heading">
+    </div>
+    <table id="example2" class="table table-bordered table-hover">
+        <caption style="text-align:center"><i><b>Chi tiết mua hàng</b></i></caption>
+        <thead>
+            <tr>
+                <th>Mã sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.masanpham</td>
+                    <td>
+                        @item.tensanpham
+                    </td>
+                    <td>@item.soluong</td>
+                    <td>@item.thanhtien</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr></tr>
+        </tfoot>
+    </table>
+</div>

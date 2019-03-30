@@ -1,0 +1,33 @@
+﻿@model Models.Entity.TinTuc
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+<div class="col-sm-9">
+    <div class="blog-post-area">
+        <div class="single-blog-post">
+            <h3>@Model.ten</h3>
+            <div class="post-meta">
+                <ul>
+                    <li><i class="fa fa-user"></i> Thái Trần</li>
+                    <li><i class="fa fa-clock-o"></i>@System.DateTime.Today</li>
+                </ul>
+                <span>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </span>
+            </div>
+            <a href="">
+                <img src="@Url.Content("/Photo/"+Model.linkanh)" alt="">
+            </a>
+            <p>
+                @Html.Raw(Model.mota)
+            </p>
+          
+        </div>
+    </div><!--/blog-post-area-->
+</div>
+

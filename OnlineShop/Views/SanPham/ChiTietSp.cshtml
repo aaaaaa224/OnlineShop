@@ -1,0 +1,84 @@
+﻿@model Models.Entity.SanPham
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+<div class="product-details">
+    <!--product-details-->
+    <div class="col-sm-5">
+        <div class="view-product">
+            <img src="@Url.Content("/Photo/" + Model.linkanh)" alt="" style="width:329px;height:434px;" />
+        </div>
+        <div id="similar-product" class="carousel slide" data-ride="carousel">
+
+        </div>
+
+    </div>
+    <div class="col-sm-7">
+        <div class="product-information">
+            <!--/product-information-->
+        <h3>@Model.DanhMucSanPham.tendanhmucsanpham</h3>
+            @if (Model.uutien == 3)
+            { <img src="/Content/images/product-details/new.jpg" class="newarrival" alt="" /> }
+            @if (Model.uutien == 2)
+            {
+                <img src="/Content/images/home/sale.png" class="newarrival" alt="" style="width:42px;height:42px;" />
+            }
+            <h2>@Model.tensanpham</h2>
+            <p>Mã SP:@Model.masanpham</p>
+            <img src="/Content/images/product-details/rating.png" alt="" />
+            <span>
+                <span>@Model.giaban VND</span>
+                <a href="/ShopingCart/AddItem/@Model.masanpham" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào rỏ hàng</a>
+            </span>
+            <p><b>Xuất xứ: <span style="color:red;font-family:Arial;">@Model.xuatxu</span></b></p>
+            <p><b>Số lượng hiện có :@Model.soluong</b></p>
+            <p><b>Shop :</b>Thái Trần</p>
+            <a href=""><img src="/Content/images/product-details/share.png" class="share img-responsive" alt="" /></a>
+        </div><!--/product-information-->
+    </div>
+</div><!--/product-details-->
+
+<div class="category-tab shop-details-tab">
+    <!--category-tab-->
+    <div class="col-sm-12">
+        <ul class="nav nav-tabs">
+            <li class="active" ><a href="#details" data-toggle="tab">Chi tiết</a></li>
+            <li><a href="#reviews" data-toggle="tab">Đánh giá</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane fade" id="details">
+            <p>@Model.mota</p>
+            <p>@Model.chitiet</p>
+            <p><b>Create by Huỳnh Đức</b></p>
+        </div>
+        <div class="tab-pane fade" id="tag">
+
+        </div>
+
+        <div class="tab-pane fade active in" id="reviews">
+            <div class="col-sm-12">
+                @using (Html.BeginForm("DanhGiaSp", "SanPham", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <span>
+                        <input type="hidden" value="@Model.masanpham" name="masanpham"/>
+                      
+                        <input type="text" placeholder="Tên của bạn" name="tennguoiphanhoi" />
+                        @Html.ValidationMessage("tennguoiphanhoi",new { @class="text-danger"})
+                        <br />
+                        <input type="email" placeholder="Email của bạn" name="email" />
+                        @Html.ValidationMessage("email", new { @class = "text-danger" })
+                    </span>
+                        <textarea name="noidung" placeholder="Nội dung"></textarea>
+                        @Html.ValidationMessage("noidung", new { @class = "text-danger" })
+                        <b>Đánh giá</b> <img src="/Content/images/product-details/rating.png" alt="" />
+                        <button type="submit" class="btn btn-default pull-right">
+                            Đăng bài
+                        </button>
+                }
+            </div>
+        </div>
+    </div>
+</div><!--/category-tab-->

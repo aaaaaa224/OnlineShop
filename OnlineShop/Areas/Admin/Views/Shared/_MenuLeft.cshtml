@@ -1,0 +1,36 @@
+﻿
+<div class="sidebar-nav navbar-collapse">
+    <ul class="nav" id="side-menu">
+        <li class="sidebar-search">
+            @using (Html.BeginForm("TimKiem", "ProductManagement", FormMethod.Post))
+            {
+                <div class="input-group custom-search-form">
+                    <input type="text" name="timkiem" id="timkiem" class="form-control" placeholder="Tìm kiếm sản phẩm....">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            }
+            <!-- /input-group -->
+        </li>
+        <li>
+            <a href="/Admin/Home/Index"> <i class="fa fa-dashboard fa-fw"></i> Quản lý trang quản trị</a>
+        </li>
+        <li>
+            <a href="/Admin/ProductManagement/Index"> <i class="fa fa-dashboard fa-fw"></i> Quản lý sản phẩm</a>
+        </li>
+        <li>
+            <a href="/Admin/Customer/Index"> <i class="fa fa-dashboard fa-fw"></i> Quản lý khách mua hàng</a>
+        </li>
+
+        <li>
+            <a href="/Admin/News/Index"><i class="fa fa-dashboard fa-fw"></i> Tin tức</a>
+        </li>
+
+        <li>
+            <a href="/Admin/Slide/Index"><i class="fa fa-dashboard fa-fw"></i> Quản lý slide trình chiếu</a>
+        </li>
+    </ul>
+</div>

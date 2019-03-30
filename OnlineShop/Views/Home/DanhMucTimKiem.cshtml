@@ -1,0 +1,5 @@
+﻿@model List<Models.Entity.DanhMucSanPham>
+@foreach(var item in Model)
+{
+    <option value="@item.madanhmucsanpham">@item.tendanhmucsanpham</option>
+}

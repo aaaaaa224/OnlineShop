@@ -1,0 +1,43 @@
+﻿
+@model Models.Entity.TinTuc
+
+@using Models.Entity
+
+@{
+    ViewBag.Title = "Sửa";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+@using (@Html.BeginForm("EditNews", "News", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-md-8">
+            <div class="box-body">
+                <input type="hidden" value="@Model.ma" name="ma" id="ma"/>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tên bản tin</label>
+                    <input type="text" value="@Model.ten" class="form-control" id="ten" name="ten" placeholder="Tên bản tin" style="border-radius: 0;box-shadow:none; border-color: #d2d6de;">
+                    @Html.ValidationMessageFor(model => model.ten, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Nội dung bản tin</label>
+                    <textarea class="form-control" id="mota" name="mota" placeholder="Nội dung bản tin" style="border-radius: 0;box-shadow:none; border-color: #d2d6de;height:300px;">  @Model.mota</textarea>
+                    @Html.ValidationMessageFor(model => model.mota, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Chọn ảnh</label>
+                    <input type="file" id="linkanh" value="Chọn ảnh" name="linkanh">
+                    <img src="@Url.Content("/Photo/"+@Model.linkanh)" width="100" height="100"/>
+                    @Html.ValidationMessageFor(model => model.linkanh, "", new { @class = "text-danger" })
+                    <span class="text-danger">@ViewBag.loianh</span>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Sửa</button>
+            </div>
+        </div>
+    </div>
+}
+
+

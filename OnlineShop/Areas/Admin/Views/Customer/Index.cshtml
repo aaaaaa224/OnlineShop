@@ -1,0 +1,48 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<Models.DTO.KhachDatHangDTO>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+<div class="box-body">
+    <div class="panel-heading">
+    </div>
+    <table id="example2" class="table table-bordered table-hover">
+        <caption style="text-align:center"><i><b>Danh sách khách mua hàng</b></i></caption>
+        <thead>
+            <tr>
+                <th>Mã khách hàng</th>
+                <th>Tên khách hàng</th>
+                <th>Số điện thoại</th>
+                <th>Địa chỉ</th>
+                <th>Email</th>
+                <th>Ngày đặt hàng</th>
+                <th>Tổng tiền</th>
+                <th>Chi tiết đơn hàng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.makhachhang</td>
+                    <td>
+                        @item.tenkhachhang
+                    </td>
+                    <td>@item.sodienthoai</td>
+                    <td>@item.diachi</td>
+                    <td>@item.email</td>
+                    <td>@item.ngaydathang</td>
+                    <td>@item.tongtien</td>
+                    <td><a href="/Admin/Customer/ChiTiet?id=@item.magiohang">Chi tiết</a></td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr></tr>
+        </tfoot>
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new {page }))
+</div>
+
